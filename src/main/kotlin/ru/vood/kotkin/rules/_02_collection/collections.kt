@@ -124,7 +124,7 @@ fun main() {
         }
 
     val get = avgSalaryByDept["Asdsad"]
-    val get2 = avgSalaryByDept.get("Asdsad")
+    val get2 = avgSalaryByDept.get("Asdsad") ?: error("вай-вай не нашли")
 
     println("Средняя зарплата по отделам: $avgSalaryByDept")
 
