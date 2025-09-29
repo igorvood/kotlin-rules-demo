@@ -27,17 +27,18 @@ data class Client(
  * Value класс с nullable значением.
  * Обратите внимание: сам ClientIdNullable не может быть null, но его значение может быть null.
  */
-@JvmInline
-value class ClientIdNullable(
-    val value: String?  // Значение может быть null, но сама обертка - нет
+
+data class Car(
+    val марка: String,
+    val `производитель фаркопа`: String?  // Значение может быть null
 )
 
 /**
  * Data class с nullable value class.
  * Здесь уже сама обертка ClientIdNullable может быть null.
  */
-data class ClientNullable(
-    val id: ClientIdNullable?,  // И сама обертка, и её значение могут быть null
+data class ClientWithNullable(
+    val carInfo: Car?,  // И сама обертка, и её значение могут быть null
 )
 
 fun main() {
@@ -48,20 +49,20 @@ fun main() {
     // Создаем клиента с гарантированно не-null ID
     val client = Client(ClientId("sad"))
     // Создаем клиента с nullable ID (и обертка, и значение могут быть null)
-    val clientNullable = ClientNullable(ClientIdNullable(null))
+    val clientNullable = ClientWithNullable(Car("Пипелац",null))
 
     // Работа с non-null версией - простая и безопасная
     val idStr: String = client.id.value  // Не нужно проверять на null
 
     // Работа с nullable версией - требует проверок
-    val idStrNullable: String? = clientNullable.id?.value  // Проверяем и обертку, и значение
+    val idStrNullable: String? = clientNullable.carInfo?.`производитель фаркопа`  // Проверяем и обертку, и значение
 
     // ----------------------------------------------------------------------
     // ОПЕРАТОР БЕЗОПАСНОГО ВЫЗОВА ?. (SAFE CALL OPERATOR)
     // ----------------------------------------------------------------------
 
     // ?. - безопасный вызов: если значение null, вернет null вместо выброса исключения
-    val safeValue: String? = clientNullable.id?.value  // вернет null, а не упадет
+    val safeValue: String? = clientNullable.carInfo?.`производитель фаркопа`  // вернет null, а не упадет
 
     // ----------------------------------------------------------------------
     // ОПЕРАТОР !! (NOT-NULL ASSERTION) - АНТИПАТТЕРН!
@@ -72,7 +73,7 @@ fun main() {
 
     // !! - принудительное утверждение "это значение не может быть null"
     // ЕСЛИ значение null - выбросится NullPointerException
-    val idStrNotNull1_1: String = clientNullable.id!!.value!!  // Двойной риск!
+    val idStrNotNull1_1: String = clientNullable.carInfo!!.`производитель фаркопа`!!  // Двойной риск!
 
     // Почему clientNullable.id!! выбросит NPE:
     // - clientNullable.id = ClientIdNullable(null) - сама обертка не null
@@ -84,7 +85,7 @@ fun main() {
     // ----------------------------------------------------------------------
 
     // ?: - предоставляет значение по умолчанию или бросает кастомное исключение
-    val idStrNotNull: String = clientNullable.id?.value ?: error("какое-то сообщение об ошибке")
+    val idStrNotNull: String = clientNullable.carInfo?.`производитель фаркопа` ?: error("какое-то сообщение об ошибке")
     // Если clientNullable.id?.value = null, выполнится правая часть ?:
 
     // ----------------------------------------------------------------------
@@ -95,7 +96,7 @@ fun main() {
     // тут он компилируется т.к. выше уже прогла проверка на нал в 2-х местах
     // val idStrNotNull: String = clientNullable.id?.value ?: error("какое-то сообщение об ошибке")
     // val idStrNotNull1_1: String = clientNullable.id!!.value!!  // Двойной риск!
-     val idStrNotNull2: String = clientNullable.id.value
+     val idStrNotNull2: String = clientNullable.carInfo.`производитель фаркопа`
     // Компилятор не пропустит это, так как clientNullable.id nullable
 
     // Но если бы скомпилировалось, это привело бы к:
@@ -119,15 +120,15 @@ fun main() {
     // После компиляции clientId будет представлен как String, без дополнительного объекта
 
     println("Non-null client ID: ${client.id.value}")
-    println("Nullable client ID: ${clientNullable.id?.value ?: "null"}")
+    println("Nullable client ID: ${clientNullable.carInfo?.`производитель фаркопа` ?: "null"}")
 
     // ----------------------------------------------------------------------
     // ПРАКТИЧЕСКАЯ ДЕМОНСТРАЦИЯ РАЗНИЦЫ МЕЖДУ ОПЕРАТОРАМИ
     // ----------------------------------------------------------------------
 
-    val safeExample = clientNullable.id?.value?.length      // Int? = null
-    val elvisExample = clientNullable.id?.value?.length ?: 0 // Int = 0
-    val assertionExample = clientNullable.id!!.value!!.length // NPE!
+    val safeExample = clientNullable.carInfo?.`производитель фаркопа`?.length      // Int? = null
+    val elvisExample = clientNullable.carInfo?.`производитель фаркопа`?.length ?: 0 // Int = 0
+    val assertionExample = clientNullable.carInfo!!.`производитель фаркопа`!!.length // NPE!
 
     println("Safe call: $safeExample")     // null
     println("Elvis operator: $elvisExample") // 0
@@ -212,26 +213,26 @@ Value классы устраняют overhead обертки - в runtime ис�
  */
 
 // ЛУЧШИЕ АЛЬТЕРНАТИВЫ !!:
-fun demonstrateAlternatives(client: ClientNullable) {
+fun demonstrateAlternatives(client: ClientWithNullable) {
     // 1. Safe call с Elvis
-    val id1 = client.id?.value ?: "default"
+    val id1 = client.carInfo?.`производитель фаркопа` ?: "default"
 
     // 2. checkNotNull() - бросает IllegalStateException с понятным сообщением
-    val id2 = checkNotNull(client.id?.value) { "ID должен быть задан для этого сценария" }
+    val id2 = checkNotNull(client.carInfo?.`производитель фаркопа`) { "ID должен быть задан для этого сценария" }
 
     // 3. requireNotNull() - бросает IllegalArgumentException
     // тут можно убрать ?. т.к. выше уже прошла проверка
-    val id3 = requireNotNull(client.id?.value) { "Некорректный ID: null" }
+    val id3 = requireNotNull(client.carInfo?.`производитель фаркопа`) { "Некорректный ID: null" }
 
     // 4. Явная проверка
-    val id4 = if (client.id?.value != null) {
-        client.id.value
+    val id4 = if (client.carInfo?.`производитель фаркопа` != null) {
+        client.carInfo.`производитель фаркопа`
     } else {
         // Обработка null случая
         "unknown"
     }
 
     // 5. Extension функции
-    val id5 = client.id?.value.orEmpty() // Для String
-    val id6 = client.id?.value ?: return // Ранний возврат если null
+    val id5 = client.carInfo?.`производитель фаркопа`.orEmpty() // Для String
+    val id6 = client.carInfo?.`производитель фаркопа` ?: return // Ранний возврат если null
 }
