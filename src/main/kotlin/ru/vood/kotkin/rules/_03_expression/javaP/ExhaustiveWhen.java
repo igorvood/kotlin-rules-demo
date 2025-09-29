@@ -1,4 +1,4 @@
-package ru.vood.kotkin.rules._03_exhaustive.javaP;
+package ru.vood.kotkin.rules._03_expression.javaP;
 
 import org.jetbrains.annotations.NotNull;
 import ru.vood.kotkin.rules.ru.vood.kotkin.rules._03_exausiveWhen.EEnum;
@@ -8,7 +8,6 @@ import ru.vood.kotkin.rules.ru.vood.kotkin.rules._03_exausiveWhen.Error;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static ru.vood.kotkin.rules.ru.vood.kotkin.rules._03_exausiveWhen.ExhaustiveWhenKt.handleError;
 import static ru.vood.kotkin.rules.ru.vood.kotkin.rules._03_exausiveWhen.ExhaustiveWhenKt.performAction;
@@ -32,6 +31,7 @@ public class ExhaustiveWhen {
                 System.out.println("Обрабатываем успех: " + okResult.getValue());
                 yield "Всё успешно";
             }
+//            case null -> throw new IllegalArgumentException("Неверный тип результата");
             // ❌ НЕ НУЖНО default - компилятор знает все возможные варианты!
             // Компилятор гарантирует, что все случаи покрыты (exhaustive)
         };
