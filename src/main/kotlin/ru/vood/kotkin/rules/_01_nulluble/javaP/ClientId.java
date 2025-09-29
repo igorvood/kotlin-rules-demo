@@ -6,6 +6,7 @@ import java.util.Objects;
  * В Java нет аналога value class, поэтому приходится создавать обычный класс.
  * МИНУС: Создает overhead в runtime - дополнительный объект в памяти
  * МИНУС: Нет гарантий типобезопасности как в Kotlin
+ * МИНУС: в котлин по умолчанию все финальное!!!
  */
 public final class ClientId {
     private final String value;
