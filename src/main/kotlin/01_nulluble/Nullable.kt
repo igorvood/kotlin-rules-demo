@@ -56,8 +56,17 @@ fun main() {
     // Работа с nullable версией - требует проверок
     val idStrNullable: String? = clientNullable.id?.value  // Проверяем и обертку, и значение
 
+//    val idStrNotNull1: String = clientNullable.id.value
+    val idStrNotNull1_1: String = clientNullable.id!!.value!!
+
+
     // Принудительное извлечение значения с кастомной ошибкой
     val idStrNotNull: String = clientNullable.id?.value ?: error("какое-то сообщение об ошибке")
+
+    // Принудительное извлечение значения с кастомной ошибкой
+    val idStrNotNull2: String = clientNullable.id.value
+
+    println(idStrNotNull2)
 
     // ДЕМОНСТРАЦИЯ ПРЕИМУЩЕСТВ VALUE CLASS:
 
