@@ -8,10 +8,12 @@ fun main() {
     // ----------------------------------------------------------------------
     println("1. БАЗОВОЕ ИСПОЛЬЗОВАНИЕ TRY-CATCH КАК ВЫРАЖЕНИЯ:")
 
-    val result1 = try {
+    val result1: String = try {
         "Успешный результат: ${10 / 2}"
     } catch (e: ArithmeticException) {
         "Ошибка вычисления: ${e.message}"
+//        throw RuntimeException("Asdsadasd")
+//        null
     }
     println("Результат: $result1")
 }
