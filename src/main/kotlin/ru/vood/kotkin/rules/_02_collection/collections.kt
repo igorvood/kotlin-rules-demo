@@ -122,6 +122,10 @@ fun main() {
         .mapValues { (_, deptUsers) ->
             deptUsers.map { it.salary }.average()
         }
+
+    val get = avgSalaryByDept["Asdsad"]
+    val get2 = avgSalaryByDept.get("Asdsad")
+
     println("Средняя зарплата по отделам: $avgSalaryByDept")
 
     // ----------------------------------------------------------------------
