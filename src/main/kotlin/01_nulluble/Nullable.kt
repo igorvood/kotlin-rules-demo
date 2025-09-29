@@ -145,11 +145,16 @@ fun main() {
  * 3. Когда нужна семантика определенного типа, но без создания отдельного класса
  */
 
+interface IDtoValidator{
+    val isValid: Boolean
+}
+
 // Дополнительные примеры использования:
 @JvmInline
-value class Email(val value: String) {
+value class Email(val value: String): IDtoValidator {
+
     // Можно добавлять методы и свойства (только computed)
-    val isValid: Boolean
+    override val isValid: Boolean
         get() = value.contains("@")
 
     fun getDomain(): String = value.substringAfter("@")
@@ -157,6 +162,7 @@ value class Email(val value: String) {
 
 @JvmInline
 value class UserId(val value: Long) {
+
     // Компаньон объекты также поддерживаются
     companion object {
         fun fromString(str: String): UserId = UserId(str.toLong())
