@@ -56,17 +56,52 @@ fun main() {
     // Работа с nullable версией - требует проверок
     val idStrNullable: String? = clientNullable.id?.value  // Проверяем и обертку, и значение
 
-//    val idStrNotNull1: String = clientNullable.id.value
-    val idStrNotNull1_1: String = clientNullable.id!!.value!!
+    // ----------------------------------------------------------------------
+    // ОПЕРАТОР БЕЗОПАСНОГО ВЫЗОВА ?. (SAFE CALL OPERATOR)
+    // ----------------------------------------------------------------------
 
+    // ?. - безопасный вызов: если значение null, вернет null вместо выброса исключения
+    val safeValue: String? = clientNullable.id?.value  // вернет null, а не упадет
 
-    // Принудительное извлечение значения с кастомной ошибкой
+    // ----------------------------------------------------------------------
+    // ОПЕРАТОР !! (NOT-NULL ASSERTION) - АНТИПАТТЕРН!
+    // ----------------------------------------------------------------------
+
+    // ЭТОТ КОД ОПАСЕН - может выбросить NullPointerException в runtime!
+    // val idStrNotNull1: String = clientNullable.id.value  // Не скомпилируется - нужна проверка
+
+    // !! - принудительное утверждение "это значение не может быть null"
+    // ЕСЛИ значение null - выбросится NullPointerException
+    val idStrNotNull1_1: String = clientNullable.id!!.value!!  // Двойной риск!
+
+    // Почему clientNullable.id!! выбросит NPE:
+    // - clientNullable.id = ClientIdNullable(null) - сама обертка не null
+    // - НО clientNullable.id.value = null
+    // - Поэтому clientNullable.id!!.value!! упадет на втором !!
+
+    // ----------------------------------------------------------------------
+    // ЭЛВИС-ОПЕРАТOR ?: (ELVIS OPERATOR) - ПРЕДПОЧТИТЕЛЬНЫЙ СПОСОБ
+    // ----------------------------------------------------------------------
+
+    // ?: - предоставляет значение по умолчанию или бросает кастомное исключение
     val idStrNotNull: String = clientNullable.id?.value ?: error("какое-то сообщение об ошибке")
+    // Если clientNullable.id?.value = null, выполнится правая часть ?:
 
-    // Принудительное извлечение значения с кастомной ошибкой
-    val idStrNotNull2: String = clientNullable.id.value
+    // ----------------------------------------------------------------------
+    // ОПАСНЫЙ ПРИМЕР - ПРЯМОЙ ДОСТУП БЕЗ ПРОВЕРОК
+    // ----------------------------------------------------------------------
 
-    println(idStrNotNull2)
+    // ЭТОТ КОД ВЫБРОСИТ NullPointerException В RUNTIME!
+    // тут он компилируется т.к. выше уже прогла проверка на нал в 2-х местах
+    // val idStrNotNull: String = clientNullable.id?.value ?: error("какое-то сообщение об ошибке")
+    // val idStrNotNull1_1: String = clientNullable.id!!.value!!  // Двойной риск!
+     val idStrNotNull2: String = clientNullable.id.value
+    // Компилятор не пропустит это, так как clientNullable.id nullable
+
+    // Но если бы скомпилировалось, это привело бы к:
+    // kotlin.KotlinNullPointerException
+
+    println(idStrNotNull2)  // Эта строка никогда не выполнится из-за NPE выше
 
     // ДЕМОНСТРАЦИЯ ПРЕИМУЩЕСТВ VALUE CLASS:
 
@@ -85,6 +120,18 @@ fun main() {
 
     println("Non-null client ID: ${client.id.value}")
     println("Nullable client ID: ${clientNullable.id?.value ?: "null"}")
+
+    // ----------------------------------------------------------------------
+    // ПРАКТИЧЕСКАЯ ДЕМОНСТРАЦИЯ РАЗНИЦЫ МЕЖДУ ОПЕРАТОРАМИ
+    // ----------------------------------------------------------------------
+
+    val safeExample = clientNullable.id?.value?.length      // Int? = null
+    val elvisExample = clientNullable.id?.value?.length ?: 0 // Int = 0
+    val assertionExample = clientNullable.id!!.value!!.length // NPE!
+
+    println("Safe call: $safeExample")     // null
+    println("Elvis operator: $elvisExample") // 0
+    // println("Assertion: $assertionExample") // NPE!
 }
 
 /**
