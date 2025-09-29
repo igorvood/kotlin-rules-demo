@@ -1,7 +1,5 @@
 package ru.vood.kotkin.rules.ru.vood.kotkin.rules._03_exausiveWhen
 
-import ru.vood.kotkin.rules.ru.vood.kotkin.rules._03_exausiveWhen.EEnum.*
-
 // Sealed interface (запечатанный интерфейс) - ограничивает возможные реализации
 // Это как enum на стероидах - каждая реализация известна компилятору
 sealed interface IResult
@@ -120,3 +118,15 @@ fun handleNetworkResult(result: NetworkResult<String>) {
         // Снова не нужно else!
     }
 }
+
+/*
+Exhaustive When (исчерпывающая проверка when) - это функция компилятора Kotlin, которая:
+
+✅ Гарантирует, что все возможные случаи sealed class/enum обработаны
+
+✅ Предупреждает на этапе компиляции о необработанных случаях
+
+✅ Исключает необходимость в else ветке для известных типов
+
+✅ Защищает от ошибок при добавлении новых типов в иерархию
+ */
