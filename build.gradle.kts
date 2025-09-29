@@ -1,4 +1,5 @@
 plugins {
+    `java-library`
     kotlin("jvm") version "2.1.20"
 }
 
@@ -17,6 +18,32 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+// Опционально: настройка компиляции Java
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
 kotlin {
     jvmToolchain(21)
+}
+
+// Конфигурация исходных директорий
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("src/main/kotlin", "src/main/java"))
+        }
+        kotlin {
+            setSrcDirs(listOf("src/main/kotlin", "src/main/java"))
+        }
+    }
+    test {
+        java {
+            setSrcDirs(listOf("src/test/kotlin", "src/test/java"))
+        }
+        kotlin {
+            setSrcDirs(listOf("src/test/kotlin", "src/test/java"))
+        }
+    }
 }
