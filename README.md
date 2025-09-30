@@ -18,7 +18,7 @@
   *Преимущества:*
     - Качественная документация
     - Хорошая интеграция с Spring
-      *Ссылка:* [mockk.io](https://mockk.io/)
+      *Ссылка:* [mockk.io](https://mockk.io/),  [springmockk](https://github.com/Ninja-Squad/springmockk), [spring-boot-kotlin](https://spring.io/guides/tutorials/spring-boot-kotlin)
 
 - **Kotest** - фреймворк для тестирования  
   *Преимущества:*
