@@ -37,7 +37,7 @@ data class Car(
  * Data class с nullable value class.
  * Здесь уже сама обертка ClientIdNullable может быть null.
  */
-data class ClientWithNullable(
+data class ClientWithNullableField(
     val carInfo: Car?,  // И сама обертка, и её значение могут быть null
 )
 
@@ -49,7 +49,7 @@ fun main() {
     // Создаем клиента с гарантированно не-null ID
     val client = Client(ClientId("sad"))
     // Создаем клиента с nullable ID (и обертка, и значение могут быть null)
-    val clientNullable = ClientWithNullable(Car("Пипелац",null))
+    val clientNullable = ClientWithNullableField(Car("Пипелац",null))
 
     // Работа с non-null версией - простая и безопасная
     val idStr: String = client.id.value  // Не нужно проверять на null
@@ -213,7 +213,7 @@ Value классы устраняют overhead обертки - в runtime ис�
  */
 
 // ЛУЧШИЕ АЛЬТЕРНАТИВЫ !!:
-fun demonstrateAlternatives(client: ClientWithNullable) {
+fun demonstrateAlternatives(client: ClientWithNullableField) {
     // 1. Safe call с Elvis
     val id1 = client.carInfo?.`производитель фаркопа` ?: "default"
 
