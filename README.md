@@ -1,14 +1,32 @@
-# kotlin-rules-demo
+# Kotlin Rules Demo
 
+## Основные ресурсы по Kotlin
 
+### Книги
+- **"Kotlin в действии"** - основная книга от авторов языка  
+  *Авторы:* Себастьян Айгнер, Роман Елизаров, Светлана Исакова и др.  
+  *Ссылка:* [nnm-club.me](https://nnm-club.me/forum/viewtopic.php?t=1820703)
 
-основы котлин, книга от авторов языка https://nnm-club.me/forum/viewtopic.php?t=1820703, Себастьян Айгнер, Роман Елизаров, Светлана Исакова, и др. | Kotlin в действии
+### YouTube каналы
+- **Spectrum Data Dev** - [@spectrumdatadev9193](https://www.youtube.com/@spectrumdatadev9193)  
+  Особое внимание уделяется качеству кодовой базы
 
-канал о kotlin конфу   https://www.youtube.com/@spectrumdatadev9193, ребята очень много внимания уделяют качеству кодовой базы
+## Библиотеки для Kotlin
 
+### Тестирование
+- **MockK** - мокирование для Kotlin  
+  *Преимущества:*
+    - Качественная документация
+    - Хорошая интеграция с Spring
+      *Ссылка:* [mockk.io](https://mockk.io/)
 
-мокито для котлин https://mockk.io/, достаточно хорошее качество доки, хорошо работает со спригом
+- **Kotest** - фреймворк для тестирования  
+  *Преимущества:*
+    - Богатая функциональность
+    - Отличная работа с Spring
+      *GitHub:* [kotest/kotest](https://github.com/kotest/kotest/tree/master/documentation)
 
-шикарная билиотека функционального программирования для котлин https://arrow-kt.io/learn/typed-errors/
-
-весьма хорошая библиотека для написания тестов https://github.com/kotest/kotest/tree/master/documentation хорошо работает со спригом
+### Функциональное программирование
+- **Arrow KT** - библиотека для функционального программирования  
+  *Особенности:* Работа с типизированными ошибками
+  *Документация:* [arrow-kt.io/learn/typed-errors/](https://arrow-kt.io/learn/typed-errors/)
