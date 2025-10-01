@@ -1,4 +1,4 @@
-package ru.vood.kotkin.rules._02_collection
+package ru.vood.kotkin.rules._020_collection
 
 /**
  * ДЕМО: API РАБОТЫ С КОЛЛЕКЦИЯМИ В KOTLIN

@@ -1,7 +1,6 @@
-package ru.vood.kotkin.rules._02_collection.javaP;
+package ru.vood.kotkin.rules._020_collection.javaP;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * ДЕМО: API РАБОТЫ С КОЛЛЕКЦИЯМИ В JAVA

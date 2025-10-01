@@ -1,7 +1,7 @@
 package ru.vood.kotkin.rules.ru.vood.kotkin.rules._scope_fun
 
-import ru.vood.kotkin.rules._01_nulluble.Car
-import ru.vood.kotkin.rules._01_nulluble.ClientWithNullableField
+import ru.vood.kotkin.rules._010_nulluble.Car
+import ru.vood.kotkin.rules._010_nulluble.ClientWithNullableField
 
 // мат часть https://www.youtube.com/watch?v=U1N60QTjAeo
 

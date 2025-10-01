@@ -1,4 +1,4 @@
-package ru.vood.kotkin.rules._03_expression.javaP;
+package ru.vood.kotkin.rules._030_expression.javaP;
 
 public class If {
 

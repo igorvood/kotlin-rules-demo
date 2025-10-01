@@ -1,4 +1,4 @@
-package ru.vood.kotkin.rules._02_collection.javaP;
+package ru.vood.kotkin.rules._020_collection.javaP;
 
 import org.jetbrains.annotations.NotNull;
 

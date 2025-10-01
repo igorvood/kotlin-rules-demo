@@ -1,4 +1,4 @@
-package ru.vood.kotkin.rules._01_nulluble
+package ru.vood.kotkin.rules._010_nulluble
 
 /**
  * JvmInline value класс - это специальный тип класса в Kotlin, который оборачивает значение

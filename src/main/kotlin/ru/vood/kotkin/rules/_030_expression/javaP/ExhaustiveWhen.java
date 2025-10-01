@@ -1,4 +1,4 @@
-package ru.vood.kotkin.rules._03_expression.javaP;
+package ru.vood.kotkin.rules._030_expression.javaP;
 
 import org.jetbrains.annotations.NotNull;
 import ru.vood.kotkin.rules.ru.vood.kotkin.rules._03_exausiveWhen.EEnum;

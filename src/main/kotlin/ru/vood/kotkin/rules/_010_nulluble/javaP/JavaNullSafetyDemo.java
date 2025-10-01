@@ -1,4 +1,4 @@
-package ru.vood.kotkin.rules._01_nulluble.javaP;
+package ru.vood.kotkin.rules._010_nulluble.javaP;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
