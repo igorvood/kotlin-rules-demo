@@ -21,6 +21,26 @@ fun main() {
         // this ссылается на создаваемый объект
     }
 
+    with("asd"){}
     println(person1)
     println(person2)
 }
+
+/*
+@kotlin.internal.InlineOnly
+public inline fun <T> T.apply(block: T.() -> Unit): T {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    block()
+    return this
+}
+@kotlin.internal.InlineOnly
+public inline fun <T, R> with(receiver: T, block: T.() -> R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return receiver.block()
+}
+
+ */
